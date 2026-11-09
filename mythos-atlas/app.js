@@ -221,5 +221,42 @@ function buildStoryNavigation(){
   directory.appendChild(grid);document.querySelector(".stories-intro").insertAdjacentElement("afterend",directory)
 }
 buildStoryNavigation();
+const storyNameAliases={orpheus:["俄耳甫斯"],uranus:["乌拉诺斯"],cyclopes:["独眼巨人"]};
+const supplementalStoryCharacters=[
+  {key:"eurystheus",names:["欧律斯透斯"],latin:"Eurystheus",role:"迈锡尼王，赫拉克勒斯劳役的发布者",bio:"他命令赫拉克勒斯完成十二项艰难任务；有些任务明明完成，他仍以有人相助为由拒绝承认。"},
+  {key:"nemean-lion",names:["涅墨亚狮子"],latin:"Nemean Lion",role:"赫拉克勒斯第一项劳役中的不死之狮",bio:"它的皮刀枪不入，赫拉克勒斯最后只能徒手勒死它，再用狮爪剥下皮毛。"},
+  {key:"lernaean-hydra",names:["九头蛇","勒耳那九头蛇"],latin:"Lernaean Hydra",role:"斩头会再生的沼泽巨蛇",bio:"赫拉克勒斯每斩下一颗头，伤口便会长出新的头；他与同伴用火封住断颈，才找到战胜它的办法。"},
+  {key:"erymanthian-boar",names:["厄律曼托斯野猪"],latin:"Erymanthian Boar",role:"赫拉克勒斯劳役中的巨型野猪",bio:"赫拉克勒斯把它赶进积雪深处，等它筋疲力尽后将它活捉。"},
+  {key:"augeas",names:["奥革阿斯"],latin:"Augeas",role:"拥有多年未清理牛圈的国王",bio:"赫拉克勒斯改道两条河水清理牛圈；奥革阿斯却拒绝承认这项劳役，也不肯支付约定的报酬。"},
+  {key:"stymphalian-birds",names:["斯廷法罗斯湖边的食人鸟","斯廷法罗斯食人鸟"],latin:"Stymphalian Birds",role:"以铜喙和羽箭伤人的食人鸟群",bio:"赫拉克勒斯用铜响器惊起鸟群，再将它们从湖边驱散。"},
+  {key:"cretean-bull",names:["克里特公牛"],latin:"Cretan Bull",role:"赫拉克勒斯劳役中的狂暴公牛",bio:"这头公牛来自克里特；赫拉克勒斯奉命将它活捉，带回迈锡尼。"},
+  {key:"diomedes",names:["狄俄墨得斯"],latin:"Diomedes",role:"饲养食人马的色雷斯国王",bio:"他的马匹以人肉为食。赫拉克勒斯制服马群并将它们带走，完成又一项劳役。"},
+  {key:"geryon",names:["革律翁"],latin:"Geryon",role:"世界西端的三身巨人",bio:"赫拉克勒斯远赴世界边缘，夺走革律翁的牛群，完成第十项劳役。"},
+  {key:"hesperides",names:["赫斯珀里得斯姐妹","赫斯珀里得斯"],latin:"Hesperides",role:"守护西方金苹果园的宁芙姐妹",bio:"她们看守金苹果园。赫拉克勒斯在一项劳役中取回金苹果；不同版本对他如何取得苹果有不同讲法。"},
+  {key:"cerberus",names:["刻耳柏洛斯"],latin:"Cerberus",role:"守卫冥界入口的三头犬",bio:"它把亡者留在冥界。赫拉克勒斯曾奉命将它带到地面，又按约把它送回；俄耳甫斯则用歌声让它安静下来。"},
+  {key:"chryses",names:["克律塞斯"],latin:"Chryses",role:"阿波罗的祭司，克律塞伊斯之父",bio:"他带着赎金来到希腊军营请求领回女儿，却遭阿伽门农羞辱；阿波罗随后以瘟疫惩罚联军。"},
+  {key:"chryseis",names:["克律塞伊斯"],latin:"Chryseis",role:"阿波罗祭司克律塞斯的女儿",bio:"她被阿伽门农扣作战利品。父亲来赎人遭拒后，阿波罗降下瘟疫；她被送回后，阿伽门农又夺走布里塞伊斯。"},
+  {key:"graeae",names:["格赖埃三姐妹","格赖埃"],latin:"Graeae",role:"共用一只眼睛的三位老妇人",bio:"她们守着通往戈耳工住处的线索。珀耳修斯趁她们传递共用眼睛时取走它，换来寻找美杜莎的指引。"},
+  {key:"hundred-handed-ones",names:["百臂巨人"],latin:"Hecatoncheires",role:"被乌拉诺斯囚禁的百臂巨人",bio:"盖娅与乌拉诺斯所生的巨人，被囚在大地深处。宙斯释放他们后，他们以巨石助新一代诸神战胜泰坦。"},
+  {key:"gorgons",names:["戈耳工姐妹"],latin:"Gorgons",role:"住在世界边缘的蛇发女怪",bio:"美杜莎是戈耳工姐妹中唯一会死的一位；珀耳修斯借助雅典娜的盾面反光避开她的石化目光。"}
+];
+const storyCharacterByAlias=new Map();
+for(const person of people){const entry={...person,aliases:storyNameAliases[person.id]||[]};for(const name of [person.name,...entry.aliases])storyCharacterByAlias.set(name,entry)}
+for(const character of supplementalStoryCharacters)for(const name of character.names)storyCharacterByAlias.set(name,character);
+const storyNamePattern=[...storyCharacterByAlias.keys()].sort((a,b)=>b.length-a.length).map(name=>name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|");
+const storyNameRegex=new RegExp(storyNamePattern,"gu"),keyboardStoryCharacters=new Set();
+function annotateStoryTextNode(textNode){const source=textNode.nodeValue;storyNameRegex.lastIndex=0;let match,last=0;const fragment=document.createDocumentFragment();while((match=storyNameRegex.exec(source))){if(match.index>last)fragment.appendChild(document.createTextNode(source.slice(last,match.index)));const character=storyCharacterByAlias.get(match[0]),mention=document.createElement("span"),key=character.id||character.key;mention.className="character-mention";mention.dataset.characterKey=key;mention.dataset.characterName=match[0];mention.textContent=match[0];mention.setAttribute("aria-label",match[0]+"，"+character.role+"。"+character.bio);if(!keyboardStoryCharacters.has(key)){mention.tabIndex=0;mention.setAttribute("aria-describedby","character-tooltip");keyboardStoryCharacters.add(key)}fragment.appendChild(mention);last=storyNameRegex.lastIndex}if(last){if(last<source.length)fragment.appendChild(document.createTextNode(source.slice(last)));textNode.replaceWith(fragment)}}
+function annotateStoryCharacters(){const targets=document.querySelectorAll(".chapter .chapter-copy h3,.chapter .chapter-copy h4,.chapter .chapter-copy p:not(.variant-note),.chapter figcaption");for(const target of targets){const walker=document.createTreeWalker(target,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())if(walker.currentNode.nodeValue.trim()&&!walker.currentNode.parentElement.closest(".character-mention,.chapter-people,button,a"))nodes.push(walker.currentNode);for(const node of nodes)annotateStoryTextNode(node)}}
+const characterTooltip=document.createElement("div");characterTooltip.className="character-tooltip";characterTooltip.id="character-tooltip";characterTooltip.setAttribute("role","tooltip");characterTooltip.setAttribute("aria-hidden","true");document.body.appendChild(characterTooltip);
+function positionCharacterTooltip(){if(!activeCharacterMention)return;const rect=activeCharacterMention.getBoundingClientRect(),tipRect=characterTooltip.getBoundingClientRect(),width=tipRect.width,height=tipRect.height;let left=rect.left+rect.width/2-width/2;left=Math.max(12,Math.min(left,innerWidth-width-12));let top=rect.bottom+10;if(top+height>innerHeight-12)top=rect.top-height-10;top=Math.max(12,Math.min(top,innerHeight-height-12));characterTooltip.style.left=left+"px";characterTooltip.style.top=top+"px"}
+let activeCharacterMention=null;
+function showCharacterTooltip(mention){const character=storyCharacterByAlias.get(mention.dataset.characterName);if(!character)return;activeCharacterMention=mention;characterTooltip.replaceChildren();const title=document.createElement("strong"),latin=document.createElement("small"),role=document.createElement("b"),bio=document.createElement("p");title.textContent=mention.dataset.characterName;latin.textContent=character.latin;role.textContent=character.role;bio.textContent=character.bio;characterTooltip.append(title,latin,role,bio);characterTooltip.setAttribute("aria-hidden","false");characterTooltip.classList.add("is-visible");positionCharacterTooltip()}
+function hideCharacterTooltip(){characterTooltip.classList.remove("is-visible");characterTooltip.setAttribute("aria-hidden","true");activeCharacterMention=null}
+document.addEventListener("pointerover",event=>{const mention=event.target.closest?.(".character-mention");if(mention)showCharacterTooltip(mention)});
+document.addEventListener("pointerout",event=>{if(event.target.closest?.(".character-mention")&&!event.relatedTarget?.closest?.(".character-mention"))hideCharacterTooltip()});
+document.addEventListener("focusin",event=>{const mention=event.target.closest?.(".character-mention");if(mention)showCharacterTooltip(mention)});
+document.addEventListener("focusout",event=>{if(event.target.closest?.(".character-mention"))hideCharacterTooltip()});
+window.addEventListener("scroll",positionCharacterTooltip,{passive:true});window.addEventListener("resize",positionCharacterTooltip);
+annotateStoryCharacters();
 function updateProgress(){const total=document.documentElement.scrollHeight-innerHeight,progress=total>0?Math.min(100,Math.max(0,scrollY/total*100)):0;document.getElementById("progress-bar").style.width=progress+"%";const current=chapters.reduce((n,c,i)=>c.getBoundingClientRect().top<innerHeight*.56?i+1:n,1);document.getElementById("progress-label").textContent=String(current).padStart(2,"0")+" / "+String(chapters.length).padStart(2,"0")}
 window.addEventListener("scroll",updateProgress,{passive:true});window.addEventListener("resize",updateProgress);makeGraph();updateProgress();
