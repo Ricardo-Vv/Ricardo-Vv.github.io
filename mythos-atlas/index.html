@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a29">
+  <meta name="description" content="从混沌到奥林匹斯，再到特洛伊与归乡。用交互人物关系图，读懂古希腊神话。">
+  <title>神谱星图｜古希腊诸神与英雄</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Source+Han+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#relationship-map">跳到人物关系图</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="神谱星图，回到页面顶部"><span class="brand-mark" aria-hidden="true">✳</span><span>神谱星图<span class="brand-sub">A STORY ATLAS</span></span></a>
+    <nav class="top-nav" aria-label="主导航"><a href="#relationship-map">人物关系</a><a href="#stories">故事篇章</a><a href="#sources">古典来源</a></nav>
+    <a class="nav-cta" href="#stories">开始阅读 <span aria-hidden="true">↘</span></a>
+  </header>
+  <main id="top">
+    <section class="map-intro" aria-labelledby="page-title">
+      <div class="intro-kicker"><span class="kicker-line"></span> CHAOS · OLYMPUS · HEROES</div>
+      <div class="intro-row">
+        <div><h1 id="page-title">神与英雄，<em>彼此相连。</em></h1><p class="intro-copy">从大地盖娅的第一声呼吸，到特洛伊城下的最后一场决斗——沿着亲缘、盟约与冲突，进入希腊神话的长故事。</p></div>
+        <div class="intro-note"><span class="note-star">✦</span><span>先看关系，再沿着人物<br>走进故事。</span></div>
+      </div>
+    </section>
+    <section id="relationship-map" class="map-section" aria-labelledby="map-title">
+      <div class="section-heading map-heading"><div><div class="eyebrow">THE FAMILY OF THE GODS</div><h2 id="map-title">人物关系图</h2><p>点选人物，查看专属立绘、关键关系与对应篇章。</p></div><div class="map-count"><b id="character-count">—</b><span>位人物<br>一条故事线</span></div></div>
+      <div class="map-toolbar">
+        <label class="search-box"><span class="search-icon" aria-hidden="true">⌕</span><input id="person-search" type="search" placeholder="搜索人物，例如：珀耳塞福涅" autocomplete="off" aria-label="搜索人物"><kbd>Ctrl K</kbd><div id="search-results" class="search-results" role="listbox" hidden></div></label>
+        <div class="filter-wrap" aria-label="关系图谱人物筛选"><span class="filter-label">聚焦</span><div class="filter-buttons" id="filter-buttons">
+          <button class="filter-chip is-active" data-filter="all" aria-pressed="true">全部</button><button class="filter-chip" data-filter="origin" aria-pressed="false">原初与大地后裔</button><button class="filter-chip" data-filter="titan" aria-pressed="false">泰坦</button><button class="filter-chip" data-filter="olympian" aria-pressed="false">奥林匹斯</button><button class="filter-chip" data-filter="mortal" aria-pressed="false">英雄与凡人</button><button class="filter-chip" data-filter="troy" aria-pressed="false">特洛伊</button><button class="filter-chip" data-filter="odyssey" aria-pressed="false">归乡</button>
+        </div></div>
+      </div>
+      <div class="graph-frame">
+        <div class="graph-scroll" tabindex="0" aria-label="可横向滚动的人物关系图"><svg id="relation-graph" viewBox="0 0 1680 1040" role="img" aria-labelledby="graph-label graph-description"><title id="graph-label">古希腊神话人物关系图</title><desc id="graph-description">圆点表示人物，连线表示血缘、婚姻、盟友或冲突。请选择人物查看详情。</desc><g id="group-labels"></g><g id="edge-layer"></g><g id="node-layer"></g></svg></div>
+        <div class="graph-footer"><div class="graph-legend" aria-label="关系线说明"><span><i class="legend-line family"></i>血缘</span><span><i class="legend-line marriage"></i>婚姻</span><span><i class="legend-line alliance"></i>盟友 / 牵连</span><span><i class="legend-line conflict"></i>冲突</span></div><span class="graph-hint">拖动或滚动查看全图 <span aria-hidden="true">↔</span></span></div>
+      </div>
+      <aside id="person-sheet" class="person-sheet" aria-live="polite" aria-atomic="true">
+        <div class="portrait-frame"><div id="sheet-portrait" class="sheet-portrait" role="img" aria-label="所选人物立绘"></div><span class="portrait-caption">PORTRAIT OF THE GODS</span><span id="sheet-emblem" class="portrait-emblem" aria-hidden="true">Γ</span></div>
+        <div class="sheet-main"><div class="sheet-eyebrow" id="sheet-category">ORIGIN · PRIMEVAL</div><div class="sheet-title-row"><h3 id="sheet-name">盖娅</h3><span id="sheet-greek" class="greek-name">Gaia</span></div><p id="sheet-role" class="sheet-role">大地的原初女神</p><p id="sheet-bio" class="sheet-bio"></p></div>
+        <div class="sheet-connections"><div class="sheet-label">关系相连</div><div id="sheet-related" class="related-people"></div></div>
+        <a id="sheet-story-link" class="sheet-link" href="#chapter-1">读她的故事 <span aria-hidden="true">↗</span></a>
+      </aside>
+      <p class="map-caveat"><span>＊</span>本图按“创世—奥林匹斯—英雄—归乡”串起本页核心人物，并非希腊神话全集；珀耳修斯、忒修斯、俄耳甫斯、俄狄浦斯与阿尔戈英雄等支线暂未展开，各地传统也有异说。</p>
+    </section>
+    <section id="stories" class="stories-section" aria-labelledby="stories-title">
+      <div class="stories-topline"><div class="eyebrow">THE THREAD OF MYTH</div><div class="reading-progress"><span id="progress-bar"></span></div><span class="progress-label" id="progress-label">01 / 09</span></div>
+      <div class="section-heading stories-intro"><div><h2 id="stories-title">从混沌开始，<br><em>一路读到归乡。</em></h2></div><p>这不是一条笔直的家谱，而是一张被欲望、誓言和命运织成的网。九个章节，把相隔数代的神与人串成同一段旅程。</p></div>
+
+      <article id="chapter-1" class="chapter chapter-image-right" data-chapter="1">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">01</span><span class="chapter-kicker">BEFORE THE WORLD</span></div><h3>无形之初，<br>大地睁开眼睛</h3>
+          <p>最先出现的是卡俄斯——不是一位有形的神，更像一片尚未分开的深渊。随后，大地盖娅、幽暗的塔耳塔洛斯与使万物彼此靠近的厄洛斯相继显现。这里的“先后”不是父母与子女那样的家谱，而是世界逐渐有了形状。</p><p>盖娅从自身生出繁星覆盖的天空乌拉诺斯。天空弯身拥抱大地，泰坦诸神由此降生；然而拥抱也成了囚笼——乌拉诺斯把孩子们压回大地深处。神话的第一场家庭冲突，已经在世界的身体里酝酿。</p>
+          <div class="chapter-people"><button data-person="chaos">卡俄斯</button><button data-person="gaia">盖娅</button><button data-person="tartarus">塔耳塔洛斯</button><button data-person="eros">厄洛斯</button><button data-person="uranus">乌拉诺斯</button></div><a class="source-tag" href="#sources">赫西俄德《神谱》1–132 行</a></div>
+        <figure class="chapter-art art-creation"><img src="./assets/cosmos-gaia.png" alt="盖娅从星空与大海之间醒来，奥林匹斯众神立于远方山巅"><figcaption>大地、天空与海，成为后世诸神的舞台。</figcaption></figure>
+      </article>
+      <article id="chapter-2" class="chapter chapter-image-left" data-chapter="2">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">02</span><span class="chapter-kicker">THE FIRST SUCCESSION</span></div><h3>王座传承，<br>恐惧吞下自己的孩子</h3>
+          <p>被压迫的盖娅把一柄锋利镰刀交给最年轻的泰坦克洛诺斯。克洛诺斯伏击父亲，夺走天空的王权。可他听见预言：自己的孩子终将推翻自己。于是每当瑞亚生下一个孩子，他便将孩子吞下——赫斯提亚、得墨忒耳、赫拉、哈得斯与波塞冬，全都被困在父亲体内。</p><p>第六个孩子宙斯被瑞亚秘密藏到克里特岛。她用襁褓里的石头替换婴儿，骗过克洛诺斯。等宙斯长大，兄弟姊妹一同归来。王座再一次易手：恐惧预言的父亲，正亲手养大自己的继承人。</p>
+          <div class="chapter-people"><button data-person="gaia">盖娅</button><button data-person="uranus">乌拉诺斯</button><button data-person="cronus">克洛诺斯</button><button data-person="rhea">瑞亚</button><button data-person="zeus">宙斯</button><button data-person="hestia">赫斯提亚</button><button data-person="demeter">得墨忒耳</button><button data-person="hera">赫拉</button><button data-person="poseidon">波塞冬</button><button data-person="hades">哈得斯</button></div><a class="source-tag" href="#sources">赫西俄德《神谱》154–506 行</a></div>
+        <figure class="chapter-art art-titans"><img src="./assets/titanomachy.png" alt="克洛诺斯与宙斯在山海之间对峙，雷霆照亮新一代神祇"><figcaption>旧王握着镰刀；新王举起雷霆。</figcaption></figure>
+      </article>
+      <article id="chapter-3" class="chapter chapter-compact" data-chapter="3">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">03</span><span class="chapter-kicker">THE TITANOMACHY</span></div><h3>雷霆照亮新秩序</h3>
+          <p>宙斯与泰坦打了十年。被救出的独眼巨人为他锻造雷霆，也把三叉戟交给波塞冬，把隐身之盔交给哈得斯。胜利之后，天空、海洋与冥界各有其主；可盖娅仍不甘心，她与塔耳塔洛斯生下提丰，掀起最后一场风暴。宙斯以雷霆击败这位百首巨怪，把旧世的反抗压回深处。</p>
+          <p>之后，普罗米修斯——泰坦伊阿珀托斯之子——在人类与宙斯之间耍了一次聪明：他把祭肉和骨头分成两份，让宙斯挑选；宙斯选中裹着油脂的白骨，从此人类把肉留下供自己食用。愤怒的宙斯藏起火种，普罗米修斯便从天界偷来余烬，藏进茴香茎，交到凡人手中。火让人能取暖、烹饪，也让他们拥有了技艺。</p>
+          <p>宙斯把他锁在高加索山，鹰每日啄食他的肝脏，肝脏又在夜里长回。另一道惩罚落在人间：诸神共同造出潘多拉，把她送到普罗米修斯的兄弟厄庇米修斯身边。哥哥曾劝弟弟不要收宙斯的礼物，厄庇米修斯却接受了。潘多拉打开封存灾厄的陶坛，疾病与劳苦飞散到人世；只有“希望”为何留在坛中，古今读者仍有不同解释。后来，赫拉克勒斯射落恶鹰，普罗米修斯才获释。</p>
+          <div class="chapter-people"><button data-person="zeus">宙斯</button><button data-person="gaia">盖娅</button><button data-person="tartarus">塔耳塔洛斯</button><button data-person="typhon">提丰</button><button data-person="poseidon">波塞冬</button><button data-person="hades">哈得斯</button><button data-person="prometheus">普罗米修斯</button><button data-person="iapetus">伊阿珀托斯</button><button data-person="epimetheus">厄庇米修斯</button><button data-person="pandora">潘多拉</button><button data-person="heracles">赫拉克勒斯</button><button data-person="cyclopes">独眼巨人</button></div><p class="variant-note">“潘多拉之坛”出自《工作与时日》；后世常称它为“潘多拉魔盒”，而“希望”留在坛中的含义并无定论。</p><a class="source-tag" href="#sources">赫西俄德《神谱》501–616、820–868 行；《工作与时日》47–105 行</a></div>
+        <figure class="chapter-art art-prometheus"><img src="./assets/prometheus-fire.png" alt="普罗米修斯把盗来的火种递给人类，雷霆仍在远处的奥林匹斯上空"><figcaption>一簇火，把神的秩序与人的生活接在一起。</figcaption></figure>
+      </article>
+      <article id="chapter-4" class="chapter chapter-compact" data-chapter="4">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">04</span><span class="chapter-kicker">OLYMPUS, A HOUSE OF MANY VOICES</span></div><h3>奥林匹斯不是一张<br>简单的家庭合照</h3>
+          <p>宙斯与赫拉共享王座，兄弟姊妹各守一方：波塞冬统辖海洋，哈得斯管理冥界，得墨忒耳掌谷物，赫斯提亚守护炉火。雅典娜从宙斯头颅中诞生；赫拉曾驱逐怀着孩子的勒托，阿波罗与阿尔忒弥斯最终在海岛提洛出生。狄俄倪索斯后来加入奥林匹斯诸神——“十二位”究竟包括谁，在不同传统里并不完全相同。</p>
+          <p>神明也会像手足一样争吵。古老颂歌说，赫尔墨斯刚出生就偷走阿波罗的牛群；他用龟甲做成竖琴，阿波罗听见琴声后，兄弟俩以乐器交换牛群，争执变成了友谊。赫尔墨斯由此同时成为牧人、旅者与传信者的守护神。</p>
+          <p>而荷马《奥德赛》第八卷里，歌者唱起阿佛洛狄忒与阿瑞斯的私会：匠神赫淮斯托斯织出看不见的青铜网，把两人困在榻上，请众神来看这场婚姻丑闻。爱欲、工艺、嘲笑与权力，全挤在一张神的家宴里。</p>
+          <p>至于爱与美的阿佛洛狄忒，赫西俄德写她从乌拉诺斯的海沫中诞生；《伊利亚特》却称她是宙斯与狄俄涅的女儿。两种起源并存，提醒我们：希腊神话从来不是只有一个版本。</p>
+          <div class="chapter-people"><button data-person="zeus">宙斯</button><button data-person="hera">赫拉</button><button data-person="hestia">赫斯提亚</button><button data-person="demeter">得墨忒耳</button><button data-person="poseidon">波塞冬</button><button data-person="hades">哈得斯</button><button data-person="athena">雅典娜</button><button data-person="apollo">阿波罗</button><button data-person="artemis">阿尔忒弥斯</button><button data-person="leto">勒托</button><button data-person="hermes">赫尔墨斯</button><button data-person="aphrodite">阿佛洛狄忒</button><button data-person="dione">狄俄涅</button><button data-person="ares">阿瑞斯</button><button data-person="hephaestus">赫淮斯托斯</button><button data-person="dionysus">狄俄倪索斯</button></div><a class="source-tag" href="#sources">赫西俄德《神谱》；《荷马颂歌·致赫尔墨斯》；荷马《奥德赛》第八卷</a></div>
+        <figure class="chapter-art art-olympus"><img src="./assets/olympian-vignettes.png" alt="三幕奥林匹斯故事：赫尔墨斯把竖琴交给阿波罗，勒托拥抱双生子，赫淮斯托斯以青铜网捕获阿佛洛狄忒与阿瑞斯"><figcaption>奥林匹斯的亲缘，常常在争执、交换与和解中显形。</figcaption></figure>
+      </article>
+      <article id="chapter-5" class="chapter chapter-image-right" data-chapter="5">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">05</span><span class="chapter-kicker">DEMETER & PERSEPHONE</span></div><h3>母亲走过大地，<br>去寻找她的女儿</h3>
+          <p>珀耳塞福涅在草地采花时，被冥王哈得斯带往地下。母亲得墨忒耳不肯接受女儿失踪，她点亮火炬走遍大地；因为悲伤而拒绝让种子发芽，众神与凡人都面临饥荒。最后，宙斯出面调停，哈得斯却让珀耳塞福涅吃下石榴籽。她必须在一年中一部分时间回到冥界，另一部分时间与母亲重逢。</p><p>古老的《致得墨忒耳颂歌》把离别写成神圣的哀歌；后世读者又从女儿的往返中，看见种子入土、谷物复生的节律。季节并非惩罚，而是失去与重逢之间反复发生的约定。</p>
+          <div class="chapter-people"><button data-person="demeter">得墨忒耳</button><button data-person="persephone">珀耳塞福涅</button><button data-person="hades">哈得斯</button><button data-person="zeus">宙斯</button></div><a class="source-tag" href="#sources">《致得墨忒耳颂歌》</a></div>
+        <figure class="chapter-art art-demeter"><img src="./assets/demeter-persephone.png" alt="得墨忒耳与珀耳塞福涅在繁花与冥界入口的交界处重逢"><figcaption>石榴籽让归来有了期限，也让重逢有了重量。</figcaption></figure>
+      </article>
+      <article id="chapter-6" class="chapter chapter-compact" data-chapter="6">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">06</span><span class="chapter-kicker">A HERO AMONG GODS</span></div><h3>赫拉克勒斯，<br>在神的家族里长大</h3>
+          <p>宙斯与凡人阿尔克墨涅生下赫拉克勒斯。赫拉对丈夫的私情怀恨在心，苦难因此从他出生前便开始。一次疯狂使赫拉克勒斯伤害至亲，他来到德尔斐求问赎罪之路，依照神谕完成十二项劳役。这里选取四项作例：制服刀枪不能伤害的涅墨亚狮子，斩杀断头又会再生的九头蛇，清理积年粪秽，还要远行取回金苹果。每一项都不只是力气的较量，也逼他学会耐心、计谋与求助。希腊人崇敬他，既因为超人的力量，也因为他承受苦难后仍继续走下去。</p>
+          <div class="chapter-people"><button data-person="heracles">赫拉克勒斯</button><button data-person="zeus">宙斯</button><button data-person="alcmene">阿尔克墨涅</button><button data-person="hera">赫拉</button></div><a class="source-tag" href="#sources">伪阿波罗多洛斯《书库》2.4–2.7</a></div>
+        <figure class="chapter-art art-heracles"><img src="./assets/heracles-labors.png" alt="赫拉克勒斯披着狮皮，与涅墨亚狮子对峙；远方雾气里浮现九头蛇"><figcaption>十二项劳役：英雄要征服的，也包括自己的狂怒。</figcaption></figure>
+      </article>
+      <article id="chapter-7" class="chapter chapter-compact" data-chapter="7">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">07</span><span class="chapter-kicker">THE APPLE OF DISCORD</span></div><h3>一枚苹果，<br>把诸神的争执送到人间</h3>
+          <p>佩琉斯与海中女神忒提斯举行婚礼，却没有邀请不和女神厄里斯。她把一枚刻着“献给最美者”的金苹果抛进宴席。赫拉许诺王权，雅典娜许诺战场胜利，阿佛洛狄忒许诺把世间最美的女人许给帕里斯。宙斯把裁决交给特洛伊王子；帕里斯伸手接过苹果，也选择了阿佛洛狄忒的承诺。他随后带走斯巴达王后海伦——墨涅拉俄斯的妻子。神的婚宴里一句偏袒，最终把希腊舰队引到特洛伊城下。</p><p class="variant-note">这一段主要由《塞浦路斯》史诗与后世摘要传下，并非《伊利亚特》正文；关于海伦究竟被带走还是自愿离开，传统并不一致。</p>
+          <div class="chapter-people"><button data-person="eris">厄里斯</button><button data-person="peleus">佩琉斯</button><button data-person="thetis">忒提斯</button><button data-person="zeus">宙斯</button><button data-person="hera">赫拉</button><button data-person="athena">雅典娜</button><button data-person="aphrodite">阿佛洛狄忒</button><button data-person="paris">帕里斯</button><button data-person="helen">海伦</button><button data-person="menelaus">墨涅拉俄斯</button></div><a class="source-tag" href="#sources">伪阿波罗多洛斯《书库》“帕里斯的裁决”</a></div>
+        <figure class="chapter-art art-paris"><img src="./assets/paris-judgement.png" alt="帕里斯手持金苹果，在赫拉、雅典娜与阿佛洛狄忒之间作出裁决"><figcaption>三个承诺，只有一枚苹果；城邦为此付出十年。</figcaption></figure>
+      </article>
+      <article id="chapter-8" class="chapter chapter-image-left" data-chapter="8">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">08</span><span class="chapter-kicker">THE ILIAD · THE LAST DAYS OF TROY</span></div><h3>特洛伊城下，<br>英雄也会失去一切</h3>
+          <p>《伊利亚特》不是十年战争的全景，而是末期数周里，阿喀琉斯如何被愤怒占据。联军统帅阿伽门农夺走布里塞伊斯后，阿喀琉斯退出战场；他的战友帕特罗克洛斯战死，他才重返战阵，与特洛伊王子赫克托耳对决。赫克托耳的父亲普里阿摩斯冒险来到敌营，恳求阿喀琉斯归还儿子的遗体。英雄终于停下复仇，两位敌人一同哭泣。</p><p>神明并未站在同一边：赫拉与雅典娜偏向希腊军，阿波罗与阿佛洛狄忒保护特洛伊。可在诗歌收束时，愤怒暂时退场，悲悯让敌对双方拥有共同的哀悼。</p>
+          <div class="chapter-people"><button data-person="achilles">阿喀琉斯</button><button data-person="agamemnon">阿伽门农</button><button data-person="briseis">布里塞伊斯</button><button data-person="patroclus">帕特罗克洛斯</button><button data-person="thetis">忒提斯</button><button data-person="hector">赫克托耳</button><button data-person="priam">普里阿摩斯</button><button data-person="andromache">安德洛玛刻</button><button data-person="hera">赫拉</button><button data-person="athena">雅典娜</button><button data-person="apollo">阿波罗</button><button data-person="aphrodite">阿佛洛狄忒</button></div><a class="source-tag" href="#sources">荷马《伊利亚特》</a></div>
+        <figure class="chapter-art art-troy"><img src="./assets/trojan-war.png" alt="阿喀琉斯与赫克托耳隔着特洛伊平原对峙，雅典娜在云端注视"><figcaption>诗歌把战场留给了两个失去亲人的家庭。</figcaption></figure>
+      </article>
+      <figure class="story-bridge"><img src="./assets/trojan-horse.png" alt="特洛伊人在夜色中把巨大的木马拖过城门，远海上有希腊船只"><figcaption><span>BETWEEN THE ILIAD AND THE ODYSSEY</span><b>木马入城，长战终于转成漫长归途。</b><p>《伊利亚特》停在赫克托耳的葬礼；战争结局由别的诗歌续写。荷马《奥德赛》第八卷让歌者唱起木马计：奥德修斯的计谋把希腊战士送入城中，也让听见这首歌的奥德修斯在宴席上落泪。</p><div class="chapter-people"><button data-person="odysseus">奥德修斯</button></div></figcaption></figure>
+      <article id="chapter-9" class="chapter chapter-image-right last-chapter" data-chapter="9">
+        <div class="chapter-copy"><div class="chapter-meta"><span class="chapter-number">09</span><span class="chapter-kicker">THE ODYSSEY · THE WAY HOME</span></div><h3>海路漫长，<br>最后一程叫作家</h3>
+          <p>特洛伊陷落后，奥德修斯用了十年才回到伊萨卡。逃出波塞冬之子波吕斐摩斯的洞穴后，他得到风神阿伊俄洛斯赠送的风囊；同伴误以为里面装着宝物，打开后，逆风把船队吹回原处。女巫喀耳刻先把同伴变成猪，又恢复他们的模样，并指引奥德修斯前往冥府。亡灵先知忒瑞西阿斯告诉他：归途仍有希望，但绝不可伤害太阳神赫利俄斯的牛群。</p>
+          <figure class="chapter-art chapter-inline-art"><img src="./assets/odysseus-trials.png" alt="奥德修斯被绑在桅杆上听海妖塞壬歌唱，船只驶过斯库拉与卡律布狄斯之间的海峡，远处是赫利俄斯的神牛岛"><figcaption>封住同伴的耳朵，绑住自己的身体——智慧让船穿过歌声与海峡。</figcaption></figure>
+          <p>他让同伴用蜡封耳，自己被绑在桅杆上，才听过海妖塞壬的歌；接着，船队在斯库拉与卡律布狄斯之间择路，六名水手被岩壁上的多首海怪夺走。疲惫的船员最终登上忒里那基亚岛，违背禁令吃了赫利俄斯的神牛。宙斯击沉船只，奥德修斯成为唯一幸存者，漂到宁芙卡吕普索的岛上。</p>
+          <p>宙斯最终命卡吕普索放人。海难后的奥德修斯被法伊阿基亚王女瑙西卡发现；她的父亲阿尔基诺俄斯设宴款待他，并派船把他送回伊萨卡。雅典娜让他以乞丐模样回到家中；佩涅洛佩以织布和试弓拖住求婚者，忒勒马科斯与父亲并肩夺回家园。最后，妻子凭一张只有他们熟悉的床认出丈夫。漫长归途，终于落在一个家愿意继续接纳他的地方。</p>
+          <div class="chapter-people"><button data-person="odysseus">奥德修斯</button><button data-person="polyphemus">波吕斐摩斯</button><button data-person="poseidon">波塞冬</button><button data-person="aeolus">阿伊俄洛斯</button><button data-person="circe">喀耳刻</button><button data-person="hades">哈得斯</button><button data-person="tiresias">忒瑞西阿斯</button><button data-person="sirens">海妖塞壬</button><button data-person="scylla">斯库拉</button><button data-person="charybdis">卡律布狄斯</button><button data-person="helios">赫利俄斯</button><button data-person="calypso">卡吕普索</button><button data-person="nausicaa">瑙西卡</button><button data-person="alcinous">阿尔基诺俄斯</button><button data-person="athena">雅典娜</button><button data-person="zeus">宙斯</button><button data-person="penelope">佩涅洛佩</button><button data-person="telemachus">忒勒马科斯</button></div><a class="source-tag" href="#sources">荷马《奥德赛》第九至十三卷、第六至八卷</a></div>
+        <figure class="chapter-art art-odysseus"><img src="./assets/odysseus-return.png" alt="黎明时，奥德修斯在伊萨卡与佩涅洛佩重逢，忒勒马科斯守在一旁"><figcaption>漂泊的终点，不只是抵达，而是重新被认出。</figcaption></figure>
+      </article>
+    </section>
+    <section class="closing-note"><div class="closing-symbol">∞</div><p>一代神推翻另一代神；一段远行，又把名字送回家族谱系。<br><em>故事没有真的结束，它只是在下一次讲述中换了一个入口。</em></p><a href="#relationship-map">回到关系图 <span aria-hidden="true">↑</span></a></section>
+    <section id="sources" class="sources-section" aria-labelledby="sources-title">
+      <div class="eyebrow">READ THE ANCIENT VOICES</div><h2 id="sources-title">故事从哪里来</h2><p>古代诗人留下的是彼此交叠的传统，而非一套统一教典。本页以早期文本为主线；创世谱系、珀耳塞福涅往返和特洛伊战争前因，都可能在不同作品中出现异文。</p>
+      <div class="source-grid">
+        <a href="https://atlas.perseus.tufts.edu/library/urn%3Acts%3AgreekLit%3Atlg0020.tlg001/" target="_blank" rel="noreferrer"><span>01 / HESIOD</span><b>《神谱》Theogony</b><i>创世、泰坦与提丰 ↗</i></a>
+        <a href="https://atlas.perseus.tufts.edu/library/urn%3Acts%3AgreekLit%3Atlg0020.tlg002/" target="_blank" rel="noreferrer"><span>02 / HESIOD</span><b>《工作与时日》</b><i>普罗米修斯与潘多拉 ↗</i></a>
+        <a href="https://atlas.perseus.tufts.edu/library/urn%3Acts%3AgreekLit%3Atlg0013.tlg002.perseus-eng2/" target="_blank" rel="noreferrer"><span>03 / HOMERIC HYMN</span><b>《致得墨忒耳颂歌》</b><i>母女离别与重逢 ↗</i></a>
+        <a href="https://atlas.perseus.tufts.edu/library/urn%3Acts%3AgreekLit%3Atlg0013.tlg004.perseus-eng2/" target="_blank" rel="noreferrer"><span>04 / HOMERIC HYMN</span><b>《致赫尔墨斯颂歌》</b><i>竖琴、牛群与兄弟和解 ↗</i></a>
+        <a href="https://www.perseus.tufts.edu/hopper/text?doc=Hom.+Il.+1.1" target="_blank" rel="noreferrer"><span>05 / HOMER</span><b>《伊利亚特》Iliad</b><i>阿喀琉斯的愤怒 ↗</i></a>
+        <a href="https://www.perseus.tufts.edu/hopper/text?doc=Hom.+Od.+8.1" target="_blank" rel="noreferrer"><span>06 / HOMER</span><b>《奥德赛》第八卷</b><i>阿瑞斯、阿佛洛狄忒与木马 ↗</i></a>
+        <a href="https://www.perseus.tufts.edu/hopper/text?doc=Hom.+Od.+1.1" target="_blank" rel="noreferrer"><span>07 / HOMER</span><b>《奥德赛》Odyssey</b><i>漂泊与归乡 ↗</i></a>
+        <a href="https://beta.perseus.tufts.edu/urn%3Acts%3AgreekLit%3Atlg0012.tlg002.cowper-eng2/book%3A12/" target="_blank" rel="noreferrer"><span>08 / HOMER · BOOK 12</span><b>《奥德赛》第十二卷</b><i>塞壬、海峡与赫利俄斯的神牛 ↗</i></a>
+        <a href="https://www.perseus.tufts.edu/hopper/text?doc=Apollod.+1.1.1" target="_blank" rel="noreferrer"><span>09 / APOLLODORUS</span><b>《书库》Bibliotheca</b><i>英雄故事的后世汇编 ↗</i></a>
+      </div><p class="source-footnote">本页讲的是“创世—奥林匹斯—赫拉克勒斯—特洛伊—奥德修斯归乡”主线，并非希腊神话全集；珀耳修斯、忒修斯、俄耳甫斯、俄狄浦斯与阿尔戈英雄等支线尚未展开。人物立绘和故事场景为原创生成作品。</p>
+    </section>
+  </main>
+  <footer class="site-footer"><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">✳</span><span>神谱星图<span class="brand-sub">A STORY ATLAS</span></span></a><span>一张图，九段故事，众神与人的共同记忆。</span><a href="#top">返回顶部 ↑</a></footer>
+  <script src="./app.js"></script>
+</body>
+</html>
+
