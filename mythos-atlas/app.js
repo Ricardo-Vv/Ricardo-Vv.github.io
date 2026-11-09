@@ -61,7 +61,35 @@ const people=[
 ["aeolus","阿伊俄洛斯","Aeolus","odyssey",1405,965,"掌管风的岛主","他把逆风封在皮囊中赠给奥德修斯；同伴误以为袋中是财宝，打开后让归航的船再次被吹远。","chapter-9",7,1,2,2,"Α"],
 ["nausicaa","瑙西卡","Nausicaa","odyssey",1525,965,"法伊阿基亚王女","她在海岸发现漂流上岸的奥德修斯，给他衣物和指路，让他得到回家的机会。","chapter-9",7,2,2,2,"Ν"],
 ["alcinous","阿尔基诺俄斯","Alcinous","odyssey",1645,965,"法伊阿基亚人的国王","瑙西卡的父亲。他款待奥德修斯，听完漂泊故事后安排船只，将他送回伊萨卡。","chapter-9",7,3,2,2,"Α"],
-["hecate","赫卡忒","Hecate","olympian",930,690,"听见珀耳塞福涅呼救、提灯寻路的女神","她在珀耳塞福涅被带往冥界时听见呼救，又把所闻告诉得墨忒耳；母女重逢后，她成为珀耳塞福涅的同行者，连接大地与冥界。","chapter-5",8,0,1,1,"Η"]
+["hecate","赫卡忒","Hecate","olympian",930,690,"听见珀耳塞福涅呼救、提灯寻路的女神","她在珀耳塞福涅被带往冥界时听见呼救，又把所闻告诉得墨忒耳；母女重逢后，她成为珀耳塞福涅的同行者，连接大地与冥界。","chapter-5",8,0,1,1,"Η"],
+["perseus","珀耳修斯","Perseus","side",110,1125,"斩下美杜莎首级、救出安德洛墨达的英雄","为了保护母亲达娜厄，他接受波吕得克忒斯的刁难远赴戈耳工之地；借雅典娜的盾面避开美杜莎的目光，后来又救下被缚在海边的安德洛墨达。","side-perseus",9,0,2,2,"Π"],
+["danae","达娜厄","Danae","side",290,1125,"阿尔戈斯公主，珀耳修斯之母","阿克里西俄斯听到外孙将杀死自己的预言后，把她囚禁起来；宙斯来到她身边，她生下珀耳修斯。儿子长大后，母子又一同面对国王波吕得克忒斯的威胁。","side-perseus",9,1,2,2,"Δ"],
+["acrisios","阿克里西俄斯","Acrisius","side",470,1125,"阿尔戈斯国王，达娜厄之父","神谕说他会死于外孙之手，他便试图隔绝女儿和孩子；多年后，珀耳修斯在一场竞技中误伤他，预言以意外而非谋杀应验。","side-perseus",9,2,2,2,"Α"],
+["polydectes","波吕得克忒斯","Polydectes","side",650,1125,"塞里福斯岛的国王","他想迎娶达娜厄，却把珀耳修斯视为阻碍，便借口索要美杜莎的头派英雄远行；珀耳修斯带回战利品后，他再也不能强迫母子。","side-perseus",9,3,2,2,"Π"],
+["medusa","美杜莎","Medusa","side",110,1270,"目光能使人石化的戈耳工","珀耳修斯不直视她，而从盾面反光中辨认她的位置。她既是恐怖的怪物，也是被英雄故事固定成“必须被斩杀”的女性形象。","side-perseus",10,0,2,2,"Μ"],
+["andromeda","安德洛墨达","Andromeda","side",290,1270,"被缚在海岸、等待牺牲的埃塞俄比亚公主","母亲的夸口招来海神的惩罚，她被锁在礁石上献给海怪；珀耳修斯杀退怪物救下她，两人随后结为伴侣。","side-perseus",10,1,2,2,"Α"],
+["cepheus","刻甫斯","Cepheus","side",470,1270,"埃塞俄比亚国王，安德洛墨达之父","海患逼近王国时，他与王后不得不把女儿送到海边；珀耳修斯出手后，国王兑现承诺，让救援者带走安德洛墨达。","side-perseus",10,2,2,2,"Κ"],
+["cassiopeia","卡西俄珀亚","Cassiopeia","side",650,1270,"埃塞俄比亚王后，安德洛墨达之母","她夸耀女儿胜过海中女神，触怒波塞冬，引来海怪与灾祸。她的骄傲把安德洛墨达推上祭台，也把珀耳修斯带到海岸。","side-perseus",10,3,2,2,"Κ"],
+["theseus","忒修斯","Theseus","side",1000,1125,"穿越迷宫、杀死弥诺陶洛斯的雅典英雄","他从父亲留下的剑认出身世，随后自愿随贡船前往克里特。阿里阿德涅给他线团，他杀死迷宫中的弥诺陶洛斯，却没能把一路帮他的公主带回家。","side-theseus",11,0,2,2,"Θ"],
+["ariadne","阿里阿德涅","Ariadne","side",1180,1125,"克里特公主，给忒修斯迷宫线团的人","她违逆父亲米诺斯，交给忒修斯线团和逃出迷宫的办法。忒修斯带她离开克里特，却在纳克索斯留下她；不同传统对她后来与狄俄倪索斯的相遇各有写法。","side-theseus",11,1,2,2,"Α"],
+["aegeus","埃勾斯","Aegeus","side",1360,1125,"雅典国王，忒修斯之父","他让儿子归航时换上白帆作为平安信号。忒修斯忘了换帆，埃勾斯远远看见黑帆，以为儿子死了，悲痛地坠海。","side-theseus",11,2,2,2,"Α"],
+["minos","米诺斯","Minos","side",1540,1125,"克里特国王，迷宫与贡船的统治者","他把弥诺陶洛斯关在代达罗斯设计的迷宫里，并要求雅典定期送来年轻人作祭品；女儿阿里阿德涅最终帮助忒修斯破坏这套秩序。","side-theseus",11,3,2,2,"Μ"],
+["minotaur","弥诺陶洛斯","Minotaur","side",1180,1270,"迷宫深处的牛首怪物","他被锁在米诺斯的迷宫里，以雅典送来的贡品为食。忒修斯循着阿里阿德涅留下的线找到他，并徒手将他杀死。","side-theseus",12,0,2,2,"Μ"],
+["orpheus","奥耳甫斯","Orpheus","side",100,1410,"以竖琴和歌声感动万物的诗人","他随阿尔戈号远征，也曾为亡妻欧律狄刻进入冥界。他的歌声打动哈得斯与珀耳塞福涅，换来一次带她回到阳光下的机会。","side-orpheus",12,1,2,2,"Ο"],
+["eurydice","欧律狄刻","Eurydice","side",280,1410,"奥耳甫斯的妻子，未能走出冥界的宁芙","她死后，奥耳甫斯追到冥界求她回来。两人几乎走到出口时，他回头确认她是否跟上；那一眼让她再次退回亡者之地。","side-orpheus",12,2,2,2,"Ε"],
+["jason","伊阿宋","Jason","side",500,1410,"率领阿尔戈英雄寻找金羊毛的队长","叔父珀利阿斯把他派往科尔基斯，原想让他死在远方；伊阿宋靠同伴和美狄亚的帮助取回金羊毛，返乡后的权力争斗却仍把他推向流亡。","side-argos",12,3,2,2,"Ι"],
+["medea","美狄亚","Medea","side",680,1410,"科尔基斯公主、女术士，伊阿宋的盟友与妻子","她为爱情背离父亲埃厄忒斯，以药草和计谋帮伊阿宋夺得金羊毛。后来伊阿宋另娶王家新娘；欧里庇得斯的悲剧把这段盟誓破裂写成家庭毁灭。","side-argos",13,0,2,2,"Μ"],
+["pelias","珀利阿斯","Pelias","side",860,1410,"伊阿宋的叔父，夺走伊奥尔科斯王位的国王","听见神谕警告后，他把穿单只凉鞋回来的伊阿宋派去取金羊毛；在某些后续版本里，美狄亚又诱使他的女儿们亲手毁掉父亲。","side-argos",13,1,2,2,"Π"],
+["aeetes","埃厄忒斯","Aeetes","side",1040,1410,"科尔基斯国王、金羊毛的守护者","他不肯把金羊毛交给陌生船队，要求伊阿宋先驯服喷火的铜蹄牛、播种龙牙并战胜武装战士；女儿美狄亚暗中替英雄找到活下来的办法。","side-argos",13,2,2,2,"Α"],
+["oedipus","俄狄浦斯","Oedipus","side",1210,1410,"解开斯芬克斯谜语的底比斯国王","他为逃避神谕而离开养父母，却在十字路口杀了生父，继而解开斯芬克斯之谜、娶了生母。瘟疫逼他追查凶手，答案最终揭开了自己的身世。","side-thebes",13,3,2,2,"Ο"],
+["jocasta","伊俄卡斯忒","Jocasta","side",1370,1410,"底比斯王后，俄狄浦斯的母亲与妻子","她与拉伊俄斯试图摆脱一则关于儿子的神谕；多年后，儿子在不知情时娶了她。随着旧王遇害真相被查明，伊俄卡斯忒先于俄狄浦斯看见了命运的闭环。","side-thebes",14,0,2,2,"Ι"],
+["laius","拉伊俄斯","Laius","side",1530,1410,"底比斯国王，俄狄浦斯的父亲","神谕预言他会死在儿子手里，他便命人遗弃婴儿；在十字路口，他与长大成人却不知身世的俄狄浦斯冲突，父子因此互不相认地相杀。","side-thebes",14,1,2,2,"Λ"],
+["sphinx","斯芬克斯","Sphinx","side",1370,1545,"堵住底比斯道路、以谜语害人的怪物","她守在城外向行人提出谜语，答错者便被吞噬。俄狄浦斯说出答案后，她坠落身亡，城市获救，他也因此进入王宫和神谕的陷阱。","side-thebes",14,2,2,2,"Σ"],
+["antigone","安提戈涅","Antigone","side",1530,1545,"俄狄浦斯的女儿，在流亡中陪伴父亲","她在父亲被逐出底比斯后搀扶、引领他穿越异乡；俄狄浦斯在科罗诺斯获得安息后，她又回城面对兄弟的葬礼与克瑞翁的禁令。","side-thebes",14,3,2,2,"Α"],
+["aethra","爱特拉","Aethra","side",830,1125,"忒修斯的母亲，为儿子留下父亲的剑与凉鞋","埃勾斯离开特罗曾时，把剑与凉鞋藏在巨石下，托她等孩子长大后取出信物；忒修斯因此得以认出自己的身世。","side-theseus",15,0,2,2,"Α"],
+["creon","克瑞翁","Creon","side",1020,1545,"底比斯王，伊俄卡斯忒的兄弟","俄狄浦斯离开后，他重新掌权；两位王子死后，他准许一人安葬、禁止另一人受葬礼，引发安提戈涅的抗命。","side-thebes",15,1,2,2,"Κ"],
+["eteocles","厄忒俄克勒斯","Eteocles","side",970,1680,"俄狄浦斯之子，与波吕尼刻斯争夺底比斯王位","兄弟约定轮流统治，却因王位冲突而彼此交战；在《安提戈涅》的戏剧开场前，两人已经同归于尽。","side-thebes",15,2,2,2,"Ε"],
+["polyneices","波吕尼刻斯","Polyneices","side",1180,1680,"俄狄浦斯之子，死后仍被禁止安葬","他与兄长厄忒俄克勒斯为底比斯王位互相征战；克瑞翁禁止他入土，妹妹安提戈涅仍秘密为他覆土。","side-thebes",15,3,2,2,"Π"]
 ].map(a=>({id:a[0],name:a[1],latin:a[2],group:a[3],x:a[4],y:a[5],role:a[6],bio:a[7],chapter:a[8],portrait:[a[9],a[10],typeof a[11]==="number"?a[11]:4,typeof a[12]==="number"?a[12]:4],symbol:typeof a[11]==="number"?a[13]:a[11]}));
 
 const edges=[
@@ -77,10 +105,15 @@ const edges=[
 ["gaia","typhon","family","母子：提丰由盖娅所生"],["tartarus","typhon","family","父子：提丰由塔耳塔洛斯所生"],["zeus","typhon","conflict","宙斯以雷霆镇压提丰"],
 ["iapetus","epimetheus","family","父子"],["prometheus","epimetheus","family","兄弟"],["epimetheus","pandora","marriage","接受宙斯安排的婚配"],["zeus","pandora","conflict","宙斯安排的惩罚性礼物"],["hephaestus","pandora","origin","奉命塑造潘多拉"],["athena","pandora","alliance","为她授予织艺与衣饰"],["prometheus","heracles","alliance","赫拉克勒斯射落恶鹰使他获释"],
 ["hermes","apollo","alliance","以竖琴换取牛群，兄弟和解"],["hephaestus","aphrodite","marriage","夫妻"],["aphrodite","ares","alliance","私会的情人"],["hephaestus","ares","conflict","以青铜网捕获阿瑞斯"],
-["odysseus","sirens","conflict","以计谋通过海妖歌声的考验"],["odysseus","scylla","conflict","船经海峡时失去六名同伴"],["odysseus","charybdis","conflict","在致命漩涡旁冒险通过"],["helios","odysseus","conflict","同伴触犯赫利俄斯的神牛"],["tiresias","odysseus","alliance","预言归途并警告神牛禁忌"],["aeolus","odysseus","alliance","赠送风囊助他归航"],["nausicaa","odysseus","alliance","救助海难后的漂流者"],["alcinous","odysseus","alliance","款待并安排船只送他回家"],["alcinous","nausicaa","family","父女"]
+["odysseus","sirens","conflict","以计谋通过海妖歌声的考验"],["odysseus","scylla","conflict","船经海峡时失去六名同伴"],["odysseus","charybdis","conflict","在致命漩涡旁冒险通过"],["helios","odysseus","conflict","同伴触犯赫利俄斯的神牛"],["tiresias","odysseus","alliance","预言归途并警告神牛禁忌"],["aeolus","odysseus","alliance","赠送风囊助他归航"],["nausicaa","odysseus","alliance","救助海难后的漂流者"],["alcinous","odysseus","alliance","款待并安排船只送他回家"],["alcinous","nausicaa","family","父女"],
+["zeus","perseus","family","宙斯与达娜厄之子"],["acrisios","danae","family","父女：阿克里西俄斯试图阻断预言"],["danae","perseus","family","母子"],["acrisios","perseus","conflict","外祖父企图避开关于外孙的神谕"],["polydectes","perseus","conflict","逼他远征夺取美杜莎首级"],["perseus","medusa","conflict","以盾面反光斩下戈耳工首级"],["perseus","andromeda","alliance","从海祭中救出并结为伴侣"],["cepheus","andromeda","family","父女"],["cassiopeia","andromeda","family","母女"],["poseidon","cassiopeia","conflict","夸口引来海神惩罚"],
+["aegeus","theseus","family","父子"],["minos","ariadne","family","父女"],["minos","minotaur","family","弥诺陶洛斯被囚于迷宫"],["theseus","minotaur","conflict","迷宫中的决战"],["ariadne","theseus","alliance","线团帮助他走出迷宫"],["dionysus","ariadne","marriage","纳克索斯岛上的另一段结局"],
+["orpheus","eurydice","marriage","夫妻与冥界重逢的尝试"],["hades","orpheus","conflict","允许他带亡妻离开，但不可回头"],["persephone","orpheus","alliance","与哈得斯一同被歌声打动"],
+["pelias","jason","conflict","以取金羊毛的远征试图除掉侄子"],["jason","medea","alliance","盟誓、助战与后来破裂的婚姻"],["aeetes","medea","family","父女"],["aeetes","jason","conflict","守护金羊毛并设置试炼"],["orpheus","jason","alliance","同乘阿尔戈号远征"],["heracles","jason","alliance","同为阿尔戈英雄"],
+["laius","jocasta","marriage","底比斯王与王后"],["laius","oedipus","family","父子与神谕"],["jocasta","oedipus","marriage","不知真相时成婚"],["oedipus","sphinx","conflict","回答谜语，解救底比斯"],["oedipus","tiresias","conflict","先知劝他停止追查旧王之死"],["oedipus","antigone","family","父女与流亡中的陪伴"],["theseus","oedipus","alliance","忒修斯在科罗诺斯庇护流亡的俄狄浦斯"],["medea","aegeus","marriage","美狄亚与埃勾斯成婚的异传"],["medea","theseus","conflict","美狄亚试图以毒酒除掉忒修斯"],["aethra","theseus","family","母子，爱特拉保存他的身世信物"],["aegeus","aethra","alliance","忒修斯父母的结合"],["jocasta","creon","family","姐弟"],["oedipus","eteocles","family","父子"],["oedipus","polyneices","family","父子"],["eteocles","polyneices","conflict","为王位相争，最终同归于尽"],["antigone","eteocles","family","兄妹"],["antigone","polyneices","family","兄妹与秘密安葬"],["creon","antigone","conflict","安提戈涅违抗禁葬令"],["creon","polyneices","conflict","克瑞翁禁止安葬"]
 ];
-const groupNames={origin:"原初与大地后裔 · PRIMEVAL",titan:"泰坦 · THE OLD DYNASTY",olympian:"奥林匹斯 · THE GODS",mortal:"英雄 · THE MORTAL LINE",troy:"特洛伊 · THE WAR",odyssey:"归乡 · THE ODYSSEY"};
-const groupOrder=["origin","titan","olympian","mortal","troy","odyssey"],groupX={origin:30,titan:280,olympian:555,mortal:1040,troy:1235,odyssey:1030};
+const groupNames={origin:"原初与大地后裔 · PRIMEVAL",titan:"泰坦 · THE OLD DYNASTY",olympian:"奥林匹斯 · THE GODS",mortal:"英雄 · THE MORTAL LINE",troy:"特洛伊 · THE WAR",odyssey:"归乡 · THE ODYSSEY",side:"支线英雄 · SIDE TALES"};
+const groupOrder=["origin","titan","olympian","mortal","troy","odyssey","side"],groupX={origin:30,titan:280,olympian:555,mortal:1040,troy:1235,odyssey:1030,side:30};
 const byId=new Map(people.map(p=>[p.id,p])),svgNS="http://www.w3.org/2000/svg",nodeLayer=document.getElementById("node-layer"),edgeLayer=document.getElementById("edge-layer"),labelLayer=document.getElementById("group-labels");
 let selectedId="gaia",activeFilter="all",searchTerm="";
 function svg(tag,attrs={}){const el=document.createElementNS(svgNS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);return el}
@@ -99,8 +132,8 @@ function updateGraph(){
 }
 function selectPerson(id,scrollToMap=false){
   const p=byId.get(id);if(!p)return;selectedId=id;
-  const labels={origin:"ORIGIN · PRIMEVAL",titan:"TITAN · THE OLD DYNASTY",olympian:"OLYMPUS · THE GODS",mortal:"HERO · THE MORTAL LINE",troy:"TROY · THE WAR",odyssey:"ODYSSEY · THE WAY HOME"};
-  const portrait=document.getElementById("sheet-portrait"),cols=p.portrait[2]||4,rows=p.portrait[3]||4,col=p.portrait[1]%cols,row=Math.floor(p.portrait[1]/cols),ext=p.portrait[0]===8?"jpg":"png";
+  const labels={origin:"ORIGIN · PRIMEVAL",titan:"TITAN · THE OLD DYNASTY",olympian:"OLYMPUS · THE GODS",mortal:"HERO · THE MORTAL LINE",troy:"TROY · THE WAR",odyssey:"ODYSSEY · THE WAY HOME",side:"SIDE TALES · HEROES"};
+  const portrait=document.getElementById("sheet-portrait"),cols=p.portrait[2]||4,rows=p.portrait[3]||4,col=p.portrait[1]%cols,row=Math.floor(p.portrait[1]/cols),ext=p.portrait[0]>=8?"jpg":"png";
   portrait.style.backgroundImage='url("./assets/portraits-'+String(p.portrait[0]).padStart(2,"0")+'.'+ext+'")';portrait.style.backgroundSize=(cols*100)+"% "+(rows*100)+"%";portrait.style.setProperty("--portrait-x",(cols>1?col*100/(cols-1):0)+"%");portrait.style.setProperty("--portrait-y",(rows>1?row*100/(rows-1):0)+"%");portrait.setAttribute("aria-label",p.name+"人物立绘");
   document.getElementById("sheet-emblem").textContent=p.symbol||"✦";document.getElementById("sheet-category").textContent=labels[p.group]||"MYTH";document.getElementById("sheet-name").textContent=p.name;document.getElementById("sheet-greek").textContent=p.latin;document.getElementById("sheet-role").textContent=p.role;document.getElementById("sheet-bio").textContent=p.bio;
   const related=document.getElementById("sheet-related");related.replaceChildren();const rel=neighbors(id);
@@ -118,5 +151,5 @@ document.querySelectorAll("[data-person]").forEach(el=>el.addEventListener("clic
 document.getElementById("sheet-story-link").addEventListener("click",e=>{const p=byId.get(selectedId),chapter=p&&document.getElementById(p.chapter);if(chapter){e.preventDefault();chapter.scrollIntoView({behavior:"smooth",block:"start"})}});
 document.addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();search.focus()}});
 const chapters=[...document.querySelectorAll(".chapter")];
-function updateProgress(){const total=document.documentElement.scrollHeight-innerHeight,progress=total>0?Math.min(100,Math.max(0,scrollY/total*100)):0;document.getElementById("progress-bar").style.width=progress+"%";const current=chapters.reduce((n,c,i)=>c.getBoundingClientRect().top<innerHeight*.56?i+1:n,1);document.getElementById("progress-label").textContent=String(current).padStart(2,"0")+" / 09"}
+function updateProgress(){const total=document.documentElement.scrollHeight-innerHeight,progress=total>0?Math.min(100,Math.max(0,scrollY/total*100)):0;document.getElementById("progress-bar").style.width=progress+"%";const current=chapters.reduce((n,c,i)=>c.getBoundingClientRect().top<innerHeight*.56?i+1:n,1);document.getElementById("progress-label").textContent=String(current).padStart(2,"0")+" / "+String(chapters.length).padStart(2,"0")}
 window.addEventListener("scroll",updateProgress,{passive:true});window.addEventListener("resize",updateProgress);makeGraph();updateProgress();
