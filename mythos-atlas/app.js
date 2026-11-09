@@ -139,7 +139,7 @@ function selectPerson(id,scrollToMap=false){
   const related=document.getElementById("sheet-related");related.replaceChildren();const rel=neighbors(id);
   if(!rel.length){const span=document.createElement("span");span.textContent="故事起点";span.className="related-person";related.appendChild(span)}
   else for(const r of rel.slice(0,7)){const b=document.createElement("button");b.className="related-person";b.type="button";b.textContent=r.person.name;b.title=r.label;b.addEventListener("click",()=>selectPerson(r.person.id));related.appendChild(b)}
-  document.getElementById("sheet-story-link").href="#"+p.chapter;updateGraph();if(scrollToMap)document.getElementById("relationship-map").scrollIntoView({behavior:"smooth",block:"start"})
+  const storyTarget=personSubstoryTargets[id]||firstSubstoryByChapter.get(p.chapter)||p.chapter;document.getElementById("sheet-story-link").href="#"+storyTarget;updateGraph();if(scrollToMap)document.getElementById("relationship-map").scrollIntoView({behavior:"smooth",block:"start"})
 }
 const search=document.getElementById("person-search"),searchResults=document.getElementById("search-results");
 function drawSuggestions(){const q=searchTerm.trim().toLocaleLowerCase();searchResults.replaceChildren();if(!q){searchResults.hidden=true;return}const found=people.filter(p=>[p.name,p.latin,p.role].some(s=>s.toLocaleLowerCase().includes(q))).slice(0,8);for(const p of found){const b=document.createElement("button");b.type="button";b.setAttribute("role","option");const n=document.createElement("span"),m=document.createElement("small");n.textContent=p.name;m.textContent=p.role;b.append(n,m);b.addEventListener("click",()=>{search.value=p.name;searchTerm=p.name;searchResults.hidden=true;selectPerson(p.id);document.getElementById("person-sheet").scrollIntoView({behavior:"smooth",block:"center"})});searchResults.appendChild(b)}searchResults.hidden=found.length===0}
@@ -148,8 +148,78 @@ search.addEventListener("keydown",e=>{if(e.key==="Enter"){const q=searchTerm.tri
 document.addEventListener("click",e=>{if(!e.target.closest(".search-box"))searchResults.hidden=true});
 document.getElementById("filter-buttons").addEventListener("click",e=>{const b=e.target.closest("button[data-filter]");if(!b)return;activeFilter=b.dataset.filter;for(const x of document.querySelectorAll(".filter-chip")){const active=x===b;x.classList.toggle("is-active",active);x.setAttribute("aria-pressed",String(active))}updateGraph()});
 document.querySelectorAll("[data-person]").forEach(el=>el.addEventListener("click",()=>selectPerson(el.dataset.person,true)));
-document.getElementById("sheet-story-link").addEventListener("click",e=>{const p=byId.get(selectedId),chapter=p&&document.getElementById(p.chapter);if(chapter){e.preventDefault();chapter.scrollIntoView({behavior:"smooth",block:"start"})}});
+document.getElementById("sheet-story-link").addEventListener("click",e=>{const p=byId.get(selectedId),targetId=p&&(personSubstoryTargets[selectedId]||firstSubstoryByChapter.get(p.chapter)||p.chapter),chapter=targetId&&document.getElementById(targetId);if(chapter){e.preventDefault();history.pushState(null,"","#"+targetId);chapter.scrollIntoView({behavior:"smooth",block:"start"})}});
 document.addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();search.focus()}});
+const substoryPlans={
+  "chapter-1":[{id:"sub-chaos",title:"卡俄斯与盖娅：世界如何出现",at:0},{id:"sub-uranus",title:"天空压住自己的孩子",at:1},{id:"sub-cronus",title:"克洛诺斯举起镰刀",at:2},{id:"sub-early-kingdom",title:"王位换手，恐惧留下",at:3}],
+  "chapter-2":[{id:"sub-cronus-prophecy",title:"克洛诺斯吞下预言",at:0},{id:"sub-zeus-hidden",title:"石头与被藏起的婴儿",at:1},{id:"sub-children-freed",title:"宙斯救出兄弟姊妹",at:2},{id:"sub-titan-war",title:"十年提坦战争",at:3}],
+  "chapter-3":[{id:"sub-titanomachy",title:"新一代向泰坦宣战",at:0},{id:"sub-cyclopes",title:"独眼巨人锻造雷霆",at:1},{id:"sub-typhon",title:"提丰挑战新王座",at:2},{id:"sub-prometheus",title:"分肉、欺骗与惩罚",at:3},{id:"sub-fire",title:"火种被带到人间",at:4},{id:"sub-pandora",title:"潘多拉打开陶坛",at:5}],
+  "chapter-4":[{id:"sub-world-lots",title:"兄弟姊妹分掌世界",at:0},{id:"sub-athena-birth",title:"雅典娜从宙斯额头诞生",at:1},{id:"sub-leto-twins",title:"勒托在提洛岛生下双生子",at:2},{id:"sub-hermes-lyre",title:"赫尔墨斯偷牛，阿波罗换来竖琴",at:3},{id:"sub-gods-net",title:"青铜网困住阿瑞斯与阿佛洛狄忒",at:5}],
+  "chapter-5":[{id:"sub-persephone-taken",title:"珀耳塞福涅被带往冥界",at:0},{id:"sub-hecate-torch",title:"赫卡忒提灯，把听见的事告诉母亲",at:1},{id:"sub-eleusis",title:"得墨忒耳来到厄琉息斯",at:2},{id:"sub-famine",title:"土地拒绝生长，宙斯让步",at:3},{id:"sub-pomegranate",title:"石榴籽与季节的约定",at:4}],
+  "chapter-6":[{id:"sub-heracles-cradle",title:"摇篮里的毒蛇",at:0},{id:"sub-heracles-penance",title:"疯狂、哀悔与十二项劳役",at:1},{id:"sub-nemean-hydra",title:"狮子与九头蛇",at:2},{id:"sub-heracles-stables",title:"金角母鹿、野猪与被冲开的牛圈",at:3},{id:"sub-heracles-labors",title:"鸟群、公牛、食人马与亚马逊腰带",at:4},{id:"sub-cerberus",title:"金苹果与冥界之犬",at:5}],
+  "chapter-7":[{id:"sub-golden-apple",title:"没有受邀的厄里斯带来金苹果",at:0},{id:"sub-paris-judgment",title:"帕里斯面对三位女神",at:1},{id:"sub-helen-taken",title:"海伦离开斯巴达",at:2},{id:"sub-war-gathering",title:"誓言召来舰队，战争逼近",at:3}],
+  "chapter-8":[{id:"sub-chryses",title:"瘟疫、祭司与阿喀琉斯的愤怒",at:0},{id:"sub-achilles-withdraws",title:"英雄拒绝再为希腊军作战",at:1},{id:"sub-patroclus-armor",title:"帕特罗克洛斯穿上好友的盔甲",at:2},{id:"sub-patroclus-falls",title:"帕特罗克洛斯倒在城下",at:3},{id:"sub-hector-duel",title:"赫克托耳与阿喀琉斯决战",at:4},{id:"sub-priam-plea",title:"普里阿摩斯夜访敌营",at:5}],
+  "chapter-9":[{id:"sub-nobody",title:"独眼巨人洞穴与“无人”之名",at:0},{id:"sub-windsack",title:"风囊被打开，波塞冬记下仇恨",at:1},{id:"sub-circe-underworld",title:"喀耳刻、赫尔墨斯与冥府问路",at:2},{id:"sub-sirens-strait",title:"海妖歌声与斯库拉海峡",at:3},{id:"sub-sun-cattle",title:"太阳神的牛群与船队覆灭",at:4},{id:"sub-calypso-nausicaa",title:"卡吕普索的岛与瑙西卡的援手",at:5},{id:"sub-ithaca-bed",title:"回到伊萨卡：一张只有夫妻懂的床",at:6}],
+  "side-perseus":[
+    {id:"sub-perseus-prophecy",title:"神谕、铜室与漂向海上的木箱",at:0,extra:["阿克里西俄斯害怕的不是女儿结婚，而是神谕把未来系在外孙身上。他把预言当成一道可以用锁和墙挡住的危险：铜室越坚固，他越相信自己仍能控制事情。可他每多做一步，母女便离王宫更远，预言本身却没有改变。"]},
+    {id:"sub-perseus-seriphos",title:"塞里福斯岛：收留母子，也觊觎达娜厄",at:1,extra:["木箱被海浪推到塞里福斯，岛上的渔人救起母子；珀耳修斯就在这座岛上长大。起初波吕得克忒斯以庇护者的身份接纳他们，年月过去，他却把达娜厄看成自己可以占有的奖赏。珀耳修斯挡在母亲面前，国王便借一场礼物宴会给年轻人设下陷阱。"]},
+    {id:"sub-perseus-gorgon",title:"远征戈耳工：借来的眼睛与镜面之盾",at:2,extra:["宴席上众人谈到赠送马匹，珀耳修斯脱口说自己能带回美杜莎的首级。波吕得克忒斯立刻把这句少年人的夸口变成命令。珀耳修斯并不知道戈耳工住在哪里，雅典娜与赫尔墨斯于是指引他先找到守路的三位老妇人；她们共用一只眼睛，他趁她们传递时拿走眼睛，换得前往宁芙居所的线索。"]},
+    {id:"sub-perseus-andromeda",title:"礁石上的安德洛墨达与海怪",at:3,extra:["刻甫斯与卡西俄珀亚向珀耳修斯说明海患从何而来，也说明女儿为何被缚在岸边。英雄提出救援，并要求他们答应让安德洛墨达与自己同行；国王和王后接受了条件。海怪逼近时，珀耳修斯用武器与美杜莎首级的方式在不同传统中各有讲法，最终他解开锁链，把公主从祭品的位置救下来。"]},
+    {id:"sub-perseus-return",title:"把首级带回家，铁饼误中外祖父",at:4,extra:["珀耳修斯回岛时，达娜厄仍躲在祭坛旁寻求庇护。他让母亲与忠于他们的人先退开，再把美杜莎的首级转向波吕得克忒斯和他的同党，强迫索婚的国王永远停手。之后他携安德洛墨达回到故土；阿克里西俄斯听见外孙归来便避走他乡，最后却在异地竞技会上被一枚偏航的铁饼击中。故事让预言成真，却没有把珀耳修斯写成蓄意弑亲者。"]}
+  ],
+  "side-theseus":[
+    {id:"sub-theseus-origin",title:"石下的剑：忒修斯走向雅典",at:0,extra:["去雅典的陆路并不安全。忒修斯逐一遇见用暴力勒索旅人的强盗，把每个人施加给路人的刑罚反转回去；他不是靠绕路长大，而是靠一次次正面应对，证明自己配得上那把石下之剑。等他走到雅典，传闻已先一步传进宫里。"]},
+    {id:"sub-theseus-poison",title:"毒酒与认父：美狄亚认出了剑",at:1,extra:["美狄亚从异乡来客身上的剑认出了埃勾斯留下的信物。她不愿新王的儿子出现，便劝埃勾斯在宴席上以毒酒除掉这个年轻人；埃勾斯端杯时也认出剑柄，立刻打翻酒杯。父子相认后，美狄亚离开雅典。此处让伊阿宋的旧盟友进入忒修斯的故事：同一个美狄亚，既曾帮助远征者，也曾把毒杯递向英雄。"]},
+    {id:"sub-theseus-maze",title:"克里特贡船：线团进入迷宫",at:2,extra:["雅典定期送往克里特的贡品人数在不同讲法里并不一样，但每次出航都意味着一群年轻人可能再也回不来。忒修斯自愿登船，打算终止这件事。阿里阿德涅先问清迷宫的路，再把线团、入口处的固定办法和一把利剑交给他。忒修斯循线抵达最深处，在狭窄黑暗中与弥诺陶洛斯搏斗，杀死它后才沿线把所有人领出。"]},
+    {id:"sub-theseus-naxos",title:"纳克索斯：英雄离开了救他的人",at:3,extra:["离开克里特后，船停在纳克索斯。阿里阿德涅已经离开父亲、王国和旧生活，原以为她与忒修斯会一同去雅典；醒来时却发现船已驶离。有人说忒修斯主动抛下她，有人把离别归于神意；伪阿波罗多洛斯则叙述狄俄倪索斯爱上她并带走她。几个版本都让这段胜利留下裂缝：走出迷宫的办法由阿里阿德涅给出，她却没有随英雄回家。"]},
+    {id:"sub-theseus-black-sail",title:"黑帆没有换下：埃勾斯之死与王位",at:4,extra:["父子约定以白帆报平安，可离别后的悲伤和返航的劳累让忒修斯忘记了信号。埃勾斯从卫城看见黑帆，来不及核实便相信儿子已经死在克里特，纵身投海。忒修斯赢得了雅典王位，却是在父亲死讯中继承它；神话把归航中最小的疏忽，变成整场冒险最重的代价。"]}
+  ],
+  "side-orpheus":[
+    {id:"sub-orpheus-love",title:"歌者与欧律狄刻：短暂的婚姻",at:0,extra:["俄耳甫斯的歌不是宴席上的装饰：传说里石块会随着琴声移动，动物会围拢聆听，船员也能在争吵时被他安定下来。欧律狄刻死后，这种力量第一次显出边界。不同作者给她的死因不同，有的写蛇咬，有的写她逃避追逐时中毒；共同点是死亡来得太快，俄耳甫斯连道别都没能完成。"]},
+    {id:"sub-orpheus-underworld",title:"活人走进冥府：一首歌穿过黑暗",at:1,extra:["俄耳甫斯穿过亡者之门，来到河边摆渡处，接着面对守在宫殿入口的三头犬。没有一关靠剑解决：船夫停下桨，犬伏在地，亡灵暂时忘记自己的苦役。冥府原本让每一个进入者交出旧身份，他却用琴声让哈得斯和珀耳塞福涅听见一个人的名字——欧律狄刻。"]},
+    {id:"sub-orpheus-rule",title:"哈得斯的条件：听见脚步，却不能确认",at:2,extra:["冥王允许亡妻跟随他离开，但规则把希望与不安绑在了一起：一路向上，不可回头，直到两人都踏出冥府。欧律狄刻必须跟在后面，俄耳甫斯不能牵她的手，也不能看见她。出口还远时，他听不到脚步，便只能把信任交给一个自己无法验证的约定。"]},
+    {id:"sub-orpheus-glance",title:"出口前的一眼：第二次失去",at:3,extra:["俄耳甫斯听见天光似乎已经到了，却仍不确定身后是否有人。他回头不是因为忘了规则，而是因为太想确认规则真的被遵守。那一瞬间，欧律狄刻重新落入阴影；她没有责骂，只留下告别。诗人把短短一眼写成整段故事的断点：两人都做到了几乎最后一步，仍无法把死者带回生者的世界。"]},
+    {id:"sub-orpheus-after",title:"歌声留下，歌者死去",at:4,extra:["回到人间后，俄耳甫斯拒绝新的婚姻，在荒野和山谷中歌唱。奥维德接着写他被狄俄倪索斯的女性追随者围攻撕碎，琴与头颅顺河漂流，琴声仍没有完全消失；其他传统对他的死法不同。故事在这里把回头的失误延伸到更久的哀悼，也解释了为何后世仍把他的名字和音乐、亡灵与失去连在一起。"]}
+  ],
+  "side-argos":[
+    {id:"sub-jason-sandals",title:"单只凉鞋与金羊毛的条件",at:0,extra:["珀利阿斯听过一则警告：当心那名只穿一只凉鞋的人。伊阿宋回到伊奥尔科斯索回王位，恰好以这样的样子出现。珀利阿斯把危险推到遥远海岸，命他取回金羊毛；伊阿宋则把任务变成一次招募，召来许多城邦的英雄。阿尔戈号离港时，他们不知道这项差事会把船长的婚姻也写进代价。"]},
+    {id:"sub-argos-voyage",title:"阿尔戈号出航：一群人的远征",at:1,extra:["船队一路遇到陌生海岸、暴风和会突然合拢的岩石。俄耳甫斯以琴声让船员保持节奏，赫拉克勒斯凭力量支撑最艰难的航段；途中赫拉克勒斯因同伴失踪离队，队伍因此少了一位最强的英雄，也更清楚这不是一趟可以全员如数回来的航行。各版本对中途停靠和伙伴名单有出入，这里抓住最常被讲述的远航节点。"]},
+    {id:"sub-colchis-tests",title:"科尔基斯的火牛与龙牙战士",at:2,extra:["美狄亚帮助伊阿宋之前，先经历了一场犹豫：如果帮助陌生英雄，她就要背叛父亲；如果拒绝，她便要看着他死在父亲设计的考验里。她把护身药膏交给伊阿宋，教他怎样套住铜牛、怎样面对从土地里长出的武装者。伊阿宋照她的指点把石块掷进人群，让战士们彼此混战，再趁金羊毛的守护者沉睡取走宝物。"]},
+    {id:"sub-fleece-escape",title:"金羊毛到手：返航并非凯旋",at:3,extra:["夺得金羊毛后，两人必须赶在埃厄忒斯追兵合围前离开科尔基斯。美狄亚从故国带走的不是一件战利品，而是对父亲和家族的背叛；伊阿宋则带着她返回，却还没有兑现珀利阿斯答应的王位。远征的胜利因此没有带来安稳的家：美狄亚的魔法和忠诚先替伊阿宋解决一项任务，往后每一次求助却都让两人之间的债更重。"]},
+    {id:"sub-pelias-revenge",title:"珀利阿斯的结局与科林斯的选择",at:4,extra:["珀利阿斯拒绝让位后，美狄亚设下返老还童的骗局，诱使他的女儿们照着她的做法处理父亲；她们相信自己能救他，却造成了他的死亡。此事令伊阿宋和美狄亚离开伊奥尔科斯，转而在科林斯生活。多年以后，伊阿宋为了王位和新盟约，决定迎娶当地王室女子；他以为能同时保住地位和家庭，美狄亚却听见他把旧誓约当成已经过期。"]},
+    {id:"sub-medea-tragedy",title:"美狄亚的复仇与伊阿宋的结局",at:5,extra:["欧里庇得斯的悲剧把结局写得最惨：美狄亚假装接受放逐，让孩子把浸过毒药的华服送给新娘；新娘穿上后遭烈焰与毒物吞噬，前来救女儿的国王也一同死去。她随后杀死自己的孩子，使伊阿宋再也无法把背叛说成只伤害了妻子；最后乘着神赐的车离开，留下他独自面对尸体和破碎的承诺。伊阿宋后来的死法另有传说，悲剧本身止于两人最后的对峙。"]}
+  ],
+  "side-thebes":[
+    {id:"sub-oedipus-oracle",title:"拉伊俄斯与伊俄卡斯忒：被遗弃的婴儿",at:0,extra:["孩子脚踝被刺穿后交给牧人带走，这伤痕后来成为他名字的来历。牧人没有执行杀婴命令，而是把孩子交给另一个牧人，婴儿最后被科林斯王室收养。俄狄浦斯在养父母家中长大，周围人却偶尔拿他的出身取笑；他真正想查清的是自己是谁，神谕给他的回答却只有更可怕的未来。"]},
+    {id:"sub-oedipus-crossroads",title:"十字路口的相杀与斯芬克斯谜题",at:1,extra:["俄狄浦斯离开科林斯，想让养育自己的家人不受神谕伤害；途中与一位老王的车队在狭路相遇，争执从口角变成杀戮。抵达底比斯后，他没有先问王位，而是应对斯芬克斯给全城的谜题。答对以后，底比斯把他当成救星；人群的欢呼遮住了他刚刚杀死的正是拉伊俄斯。"]},
+    {id:"sub-oedipus-king",title:"成为国王、成为丈夫：真相暂时沉睡",at:2,extra:["底比斯的灾病不是一个陌生敌人带来的，而是城里有一桩未被处理的旧罪。俄狄浦斯下令查明弑君者，起初相信只要把所有证人找齐，就能把污染赶出城市。他的调查越认真，越让预言中的亲缘关系显形；忒瑞西阿斯不愿开口，幸存牧人却终于说出谁把孩子送离王宫。"]},
+    {id:"sub-oedipus-truth",title:"盲目之前：一家人看见同一真相",at:3,extra:["伊俄卡斯忒先听懂牧人的证词，哀求俄狄浦斯停止追问；他误以为她担心自己出身卑微，仍坚持把命案查到底。等最后一名证人确认婴儿的身份，俄狄浦斯才知道自己既杀了父亲，也娶了母亲。伊俄卡斯忒死后，他用别针刺瞎双眼，并请求流放；他失去王位，也失去过去以为牢不可破的家庭。"]},
+    {id:"sub-oedipus-colonus",title:"流亡的终点与安提戈涅的抗命",at:4,extra:["俄狄浦斯与安提戈涅一路讨食、避开故乡追兵，最后来到雅典附近的科罗诺斯。忒修斯没有把他当作污染的象征驱逐，而是答应提供庇护；在索福克勒斯的剧作里，俄狄浦斯死在无人能随意找到的圣地，成为守护雅典的秘密。回到底比斯后，安提戈涅面对克瑞翁的禁令，认为兄长的尸体仍有接受葬礼的权利；她因此被封进石室。克瑞翁迟来的悔悟救不了她，儿子也在悲剧中死去，王后随后自尽，禁令最终毁掉发布命令的王室。"]}
+  ]
+};
+const personSubstoryTargets={
+  chaos:"sub-chaos",gaia:"sub-chaos",uranus:"sub-uranus",cronus:"sub-cronus",rhea:"sub-cronus-prophecy",zeus:"sub-zeus-hidden",titan:"sub-titan-war",
+  demeter:"sub-persephone-taken",persephone:"sub-persephone-taken",hecate:"sub-hecate-torch",hades:"sub-pomegranate",
+  heracles:"sub-heracles-labors",prometheus:"sub-prometheus",pandora:"sub-pandora",
+  perseus:"sub-perseus-gorgon",danae:"sub-perseus-prophecy",acrisios:"sub-perseus-prophecy",polydectes:"sub-perseus-seriphos",medusa:"sub-perseus-gorgon",andromeda:"sub-perseus-andromeda",cepheus:"sub-perseus-andromeda",cassiopeia:"sub-perseus-andromeda",
+  theseus:"sub-theseus-maze",aethra:"sub-theseus-origin",aegeus:"sub-theseus-poison",ariadne:"sub-theseus-naxos",minos:"sub-theseus-maze",minotaur:"sub-theseus-maze",medea:"sub-colchis-tests",dionysus:"sub-theseus-naxos",
+  orpheus:"sub-orpheus-underworld",eurydice:"sub-orpheus-love",jason:"sub-jason-sandals",pelias:"sub-jason-sandals",aeetes:"sub-colchis-tests",
+  oedipus:"sub-oedipus-oracle",laius:"sub-oedipus-oracle",jocasta:"sub-oedipus-oracle",sphinx:"sub-oedipus-crossroads",tiresias:"sub-oedipus-king",antigone:"sub-oedipus-colonus",creon:"sub-oedipus-colonus",eteocles:"sub-oedipus-colonus",polyneices:"sub-oedipus-colonus"
+};
 const chapters=[...document.querySelectorAll(".chapter")];
+const firstSubstoryByChapter=new Map(Object.entries(substoryPlans).map(([chapter,parts])=>[chapter,parts[0]?.id]));
+function buildStoryNavigation(){
+  const directory=document.createElement("nav");directory.className="story-directory";directory.setAttribute("aria-label","故事章节目录");
+  const head=document.createElement("div");head.className="story-directory-head";head.innerHTML='<span class="eyebrow">CHAPTERS & SUBSTORIES</span><h3>先选故事，再进入子章节</h3><p>每篇主故事都拆成可直达的子故事；点人物关系图中的“读她/他的故事”，也会跳到相关段落。</p>';directory.appendChild(head);
+  const grid=document.createElement("div");grid.className="story-directory-grid";
+  for(const chapter of chapters){const parts=substoryPlans[chapter.id];if(!parts?.length)continue;const h=chapter.querySelector(".chapter-copy h3"),copy=chapter.querySelector(".chapter-copy"),paragraphs=[...copy.querySelectorAll(":scope > p:not(.variant-note)")];const toc=document.createElement("nav");toc.className="chapter-subnav";toc.setAttribute("aria-label","本章子故事目录");const tocLabel=document.createElement("span");tocLabel.textContent="本章子故事";toc.appendChild(tocLabel);
+    for(let i=0;i<parts.length;i++){const part=parts[i],target=paragraphs[part.at]||(part.at===paragraphs.length?paragraphs.at(-1):null);if(!target)continue;const subhead=document.createElement("h4");subhead.id=part.id;subhead.className="substory-heading";subhead.textContent=part.title;if(part.at===paragraphs.length){let anchor=target;while(anchor.nextElementSibling?.matches(".substory-extra"))anchor=anchor.nextElementSibling;anchor.after(subhead)}else target.before(subhead);const link=document.createElement("a");link.href="#"+part.id;link.textContent=part.title;toc.appendChild(link);
+      if(part.extra?.length){const next=parts[i+1],endAt=(next?.at??paragraphs.length)-1,endP=part.at===paragraphs.length?subhead:paragraphs[Math.max(part.at,endAt)]||target;let cursor=endP;for(const extra of part.extra){const p=document.createElement("p");p.className="substory-extra";p.textContent=extra;cursor.after(p);cursor=p}}
+    }
+    h.insertAdjacentElement("afterend",toc);const card=document.createElement("a");card.className="story-directory-card";card.href="#"+parts[0].id;const number=document.createElement("span");number.className="story-directory-number";number.textContent=chapter.dataset.chapter||String(grid.children.length+1).padStart(2,"0");const title=document.createElement("b");title.textContent=h.textContent.replace(/\s+/g," ").trim();const count=document.createElement("small");count.textContent=parts.length+" 个子故事";card.append(number,title,count);grid.appendChild(card)
+  }
+  directory.appendChild(grid);document.querySelector(".stories-intro").insertAdjacentElement("afterend",directory)
+}
+buildStoryNavigation();
 function updateProgress(){const total=document.documentElement.scrollHeight-innerHeight,progress=total>0?Math.min(100,Math.max(0,scrollY/total*100)):0;document.getElementById("progress-bar").style.width=progress+"%";const current=chapters.reduce((n,c,i)=>c.getBoundingClientRect().top<innerHeight*.56?i+1:n,1);document.getElementById("progress-label").textContent=String(current).padStart(2,"0")+" / "+String(chapters.length).padStart(2,"0")}
 window.addEventListener("scroll",updateProgress,{passive:true});window.addEventListener("resize",updateProgress);makeGraph();updateProgress();
